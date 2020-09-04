@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
 import { GenerateFilesService } from './generateFiles.service';
 
-interface InputGenerateFile {
+export interface InputGenerateFile {
   documentType: string,
   InputData: {
     hotel: string,
@@ -15,8 +15,8 @@ interface InputGenerateFile {
 export class GenerateFilesController {
   constructor(private readonly filesService: GenerateFilesService) {}
 
-  @Get('generate-file')
-  async getProfile(@Query() query: InputGenerateFile, @Res() response) {
+  @Get()
+  async getProfile(@Query() query: InputGenerateFile, @Res() response): Promise<File>  {
     try {
       const {documentType, InputData} = query;
       return response.send(await this.filesService.generateFile(documentType, InputData));

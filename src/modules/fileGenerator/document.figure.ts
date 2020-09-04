@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DocumentText } from './document.text';
+import { DocumentInsertText } from './document-insert.text';
 
 interface LineInterface {
   doc: any,
@@ -10,16 +10,24 @@ interface LineInterface {
 }
 
 @Injectable()
-export class DocumentFigure extends DocumentText {
-  private defaultStrokeColor = '#aaaaaa';
-  private defaultLineSize = 550;
+export class DocumentFigure extends DocumentInsertText {
+  private readonly defaultStrokeColor = '#aaaaaa';
+  private readonly defaultLineSize = 550;
 
   generateHr({doc, y, color, lineWidth, length}: LineInterface): void {
+    const textStyle = {
+      color: color || this.defaultStrokeColor,
+      lineWidth: lineWidth || 1,
+      positionX: 50,
+      positionY: y,
+      lineTo: length || this.defaultLineSize
+    }
+
     doc
-      .strokeColor(color || this.defaultStrokeColor)
-      .lineWidth(lineWidth || 1)
-      .moveTo(50, y)
-      .lineTo(length || this.defaultLineSize, y)
+      .strokeColor(textStyle.color)
+      .lineWidth(textStyle.lineWidth)
+      .moveTo(textStyle.positionX, textStyle.positionY)
+      .lineTo(textStyle.lineTo, textStyle.positionY)
       .stroke();
   }
 }

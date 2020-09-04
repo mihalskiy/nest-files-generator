@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class DocumentText {
+export class DocumentInsertText {
   addTextToDoc (doc: any, rows: Array<[string]>, font: string, y: number, offset: number): number {
     let rowY = y;
     rows.forEach(rowText => {
@@ -20,7 +20,6 @@ export class DocumentText {
     const res = [];
     while (str.length > maxWidth) {
       found = false;
-      // Inserts new line at first whitespace of the line
       for (let i = maxWidth - 1; i >= 0; i--) {
         if (this.testWhite(str.charAt(i))) {
           res.push(str.slice(0, i));
