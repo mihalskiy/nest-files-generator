@@ -10,7 +10,7 @@
     "build": "node_modules/.bin/nest build",
     "copy-file": "cp -rv log_example.log dist/log_example.log",
     "format": "node_modules/.bin/prettier --write \\\\\\\"src/**/*.ts\\\\\\\" \\\\\\\"test/**/*.ts\\\\\\\"",
-    "start": "node_modules/.bin/nest start",
+    "start": "node dist/main.js",
     "start:dev": "node_modules/.bin/nest start --watch",
     "start:debug": "node_modules/.bin/nest start --debug --watch",
     "start:prod": "node dist/main",
