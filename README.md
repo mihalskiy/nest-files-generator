@@ -25,27 +25,33 @@ $ npm run start:prod
 
 | APIs | VERB | Parameters | Description |
 | --- | --- | --- | --- |
-| /generate-document | POST | (hotel: string, | file-generator |
-                               formData: {
-                                     files: {
-                                       label: string
-                                       images: Array<string>
-                                       required: boolean
-                                     },
-                                     guestDetails: [
-                                       label: string
-                                       value: string
-                                     ],
-                                     checkbox: [{
-                                        id: string,
-                                        text: string,
-                                        value: boolean
-                                     }],
-                                    signature: {
-                                        value: string,
-                                        label: string,
-                                    },
-                                 },
-                                 checkedInAt: Date,
-                                 checkedOutAt: Date,
-                                 convertType: string) 
+| /generate-document | POST | let parameters  | file-generator |
+
+```
+parameters = hotel: string,
+             formData: {
+                 files: {
+                   label: string
+                   images: Array<string>
+                   required: boolean
+                 },
+                 guestDetails: [
+                   label: string
+                   value: string
+                 ],
+                 checkbox: [{
+                    id: string,
+                    text: string,
+                    value: boolean
+                 }],
+                signature: {
+                    value: string,
+                    label: string,
+                },
+             },
+             checkedInAt: Date,
+             checkedOutAt: Date,
+             convertType: string) 
+
+```
+
