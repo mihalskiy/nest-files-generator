@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common'
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { GenerateFilesService } from './generateFiles.service';
 
 export interface InputGenerateFile {
@@ -22,5 +22,10 @@ export class GenerateFilesController {
     } catch (error) {
       response.send(error)
     }
+  }
+
+  @Get('')
+  ping(): string  {
+    return 'hello';
   }
 }
