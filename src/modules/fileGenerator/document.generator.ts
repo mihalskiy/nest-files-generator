@@ -89,7 +89,7 @@ export class DocumentGenerator extends DocumentFigure {
     doc
       .fontSize(textStyle.fontSize - 10)
       .font(textStyle.font)
-      .text(textStyle.dateCheckedOutAt, textStyle.positionX, textStyle.positionY)
+      .text(textStyle.textCheckIn, textStyle.positionX, textStyle.positionY)
       .font(this.fontFamily)
       .text(textStyle.dateCheckedInAt, textStyle.positionX + 100, textStyle.positionY);
     textStyle.positionY += 15;
