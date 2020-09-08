@@ -183,6 +183,7 @@ export class DocumentGenerator extends DocumentFigure {
   generateCheckboxAnswer ({ doc, checked, label, writingYValue }: DocumentGeneratorInterface): number {
     const textStyle = {
       font: this.boldFontFamily,
+      fontSize: 10,
       text: `${label} : ${checked ? '✓' : '✗'}`,
       positionX: 50,
       positionY: writingYValue,
@@ -193,8 +194,8 @@ export class DocumentGenerator extends DocumentFigure {
     textStyle.positionY += 30
 
     doc
-      .fontSize(textStyle.font)
-      .font(this.boldFontFamily)
+      .fontSize(textStyle.fontSize)
+      .font(textStyle.font)
       .text(textStyle.text,
         textStyle.positionX,
         textStyle.positionY,
@@ -289,7 +290,7 @@ export class DocumentGenerator extends DocumentFigure {
     writingYValue = this.generateBookingInfo({ doc, checkedInAt, checkedOutAt, writingYValue });
     writingYValue = this.generateGuestInfo({ doc, formData, writingYValue });
 
-    if (formData && formData.signature) {
+    if (formData && formData.signature.value) {
       const {signature} = formData;
       if (!signature.value && formData.required) {
         throw 'Signature is required';
@@ -298,7 +299,7 @@ export class DocumentGenerator extends DocumentFigure {
       }
     }
 
-    if (formData && formData.checkbox) {
+    if (formData && formData.checkbox.length) {
       for (const field of formData.checkbox) {
         const { id, text, value } = field;
         writingYValue = this.generateCheckboxAnswer({
@@ -312,9 +313,9 @@ export class DocumentGenerator extends DocumentFigure {
 
     this.generateFooter({ doc });
 
-    if (formData && formData.files) {
-      for (const field of formData.files) {
-        const { label, images, required } = field;
+    if (formData && formData.files.images.length) {
+      const { label, images, required } = formData.files;
+      for (const field of images) {
         if (!images.length && !required) continue;
         this.generateFilePages({ doc, images, label });
       }

@@ -1,8 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as PDFDocument from 'pdfkit';
-import {defaultData} from './defaultData';
 import { DocumentGenerator } from './document.generator';
-import { ConfigService } from '../../config';
 import * as path from 'path';
 
 export interface DocumentInterface {
@@ -17,19 +15,9 @@ export interface DocumentInterface {
 export class GenerateFilesService extends DocumentGenerator {
   public readonly format = 'A4';
   public readonly margin = 50;
-  public readonly ArialUnicodeFontURL: string;
-  public readonly ArialUnicodeBoldFontURL: string;
 
-  constructor(configService: ConfigService) {
-    super();
-    this.ArialUnicodeFontURL = configService.get('ArialUnicodeFontURL');
-    this.ArialUnicodeBoldFontURL = configService.get('ArialUnicodeBoldFontURL');
-  }
-
-  async generateFile(documentType: string, InputData: any): Promise<Buffer> {
-    if (!documentType) documentType = 'pdf';
-    if(!InputData) InputData = defaultData
-    return this[`${documentType}Generator`](InputData)
+  async generateFile(InputData: any): Promise<Buffer> {
+    return this[`${InputData.convertType}Generator`](InputData)
   }
 
   async pdfGenerator({hotel,formData,checkedInAt,checkedOutAt}: DocumentInterface): Promise<Buffer> {
