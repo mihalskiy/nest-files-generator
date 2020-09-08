@@ -51,7 +51,7 @@ parameters = hotel: string,
              },
              checkedInAt: Date,
              checkedOutAt: Date,
-             convertType: string) 
+             convertType: string
 
 ```
 
